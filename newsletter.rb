@@ -38,7 +38,7 @@ end
 def print_recipients(recipients)
   subscribed = []
   subscribed << recipients
-  puts subscribed.split + ", "
+  puts subscribed.join(',')
 end
 
 def print_one_article(article)
