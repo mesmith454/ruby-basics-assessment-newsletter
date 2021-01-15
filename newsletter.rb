@@ -35,23 +35,22 @@ def first_n_articles(number_of_articles)
   ARTICLES.first(number_of_articles)
 end
 
-def print_recipients(calculate_recipients)
+def print_recipients(recipients)
   subscribed = []
-  subscribed << SUBSCRIBERS.split
-  puts subscribed + ", "
+  subscribed << recipients
+  puts subscribed.split + ", "
 end
 
 def print_one_article(article)
   ARTICLES.find do |title, author, text|
     puts " #{title} #{author} #{text}"
-  # Write a method that will take an article hash
-  # and print the title, author and text as a formatted string
-  # See the README/sample output for examples
+  end
 end
 
 def print_many_articles(articles)
   articles.each do |element|
-  print_one_article(element)
+    print_one_article(element)
+  end
 end
 
 def format_campus_location(campus)
@@ -73,7 +72,7 @@ def print_newsletter(number)
   format_subject
 
   print "RECIPIENTS: "
-  print_recipients
+  print_recipients(SUBSCRIBERS)
 
   puts "BODY: "
   format_subject
@@ -83,11 +82,9 @@ def print_newsletter(number)
 end
 
 def run
-  # We want our program to print three articles by default,
-  # but we can change that number here
-  print_newsletter("3")
+  print_newsletter(3)
 end
 
 
-run
 
+run
