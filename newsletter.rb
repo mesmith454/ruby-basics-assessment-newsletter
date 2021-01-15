@@ -27,24 +27,17 @@ ARTICLES = [
 #########################
 
 def calculate_recipients
-  subscribed = []
-  SUBSCRIBERS.find_all do |email|
-    if UNSUBSCRIBED.find email == SUBSCRIBERS[index]
-      SUBSCRIBERS[index].delete
-    else
-      subscribed << SUBSCRIBERS[index]
-    end
-  end
-    puts subscribed
-  # Using the SUBSCRIBERS and UNSUBSCRIBED arrays,
-  # write a method that will return an array of only the subscribers who haven't unsubscribed
+  recipients = SUBSCRIBERS - UNSUBSCRIBED
+  puts recipients
 end
 
 def first_n_articles(number_of_articles)
-  ARTICLES.size(number_of_articles)
+  ARTICLES.first(number_of_articles)
 end
+
 def print_recipients(calculate_recipients)
-  subscribed.split
+  subscribed = []
+  subscribed << SUBSCRIBERS.split
   puts subscribed + ", "
 end
 
@@ -57,8 +50,8 @@ def print_one_article(article)
 end
 
 def print_many_articles(articles)
-  # Write a method that will take in an array of article hashes
-  # and format each one using the print_one_article method
+  articles.each do |element|
+  print_one_article(element)
 end
 
 def format_campus_location(campus)
@@ -66,7 +59,7 @@ def format_campus_location(campus)
 end
 
 def format_subject
-  puts "#{format_campus_location(CAMPUS)} Newsletter - #{DATE}\n\n"
+  puts "#{format_campus_location(CAMPUS)} Newsletter - #{DATE}"
 end
 
 def format_footer(campus)
@@ -74,7 +67,7 @@ def format_footer(campus)
 end
 
 def print_newsletter(number)
-  puts "Generating this week's newsletter...\n\n"
+  puts "Generating this week's newsletter..."
 
   print "SUBJECT: "
   format_subject
@@ -82,7 +75,7 @@ def print_newsletter(number)
   print "RECIPIENTS: "
   print_recipients
 
-  puts "\nBODY:"
+  puts "BODY: "
   format_subject
   articles = first_n_articles(number)
   print_many_articles(articles)
@@ -95,8 +88,6 @@ def run
   print_newsletter("3")
 end
 
-# When we run "ruby newsletter.rb" in the command line,
-# the 'run' method will be called because we're calling it below.
+
 run
 
- binding.pry
